@@ -37,7 +37,7 @@
 
                 <!--Heart part-->
                 <div class="flex items-center gap-2 bg-green-500 px-4 py-3 rounded-full">
-                    <span class="font-semibold text-white">2 Copy</span>
+                    <span class="font-semibold text-white">Copy</span>
                 </div>
 
             </div>
@@ -89,10 +89,10 @@
         <!-- Buttons -->
         <div class="flex gap-3 mt-4">
         <button onclick="copyNumber('999')" class="flex-1 flex items-center justify-center gap-1 border rounded-lg py-2 text-sm hover:bg-gray-100">
-         Copy
+         <img src="assets/copy.png" alt="">Copy
         </button>
         <button onclick="makeCall('National Emergency Number','999')" class="flex-1 flex items-center justify-center gap-1 bg-green-600 text-white rounded-lg py-2 text-sm hover:bg-green-700">
-         Call
+         <img src="assets/call.png" alt="">Call
         </button>
         </div>
         </div>
@@ -121,10 +121,10 @@
         <!-- Buttons -->
         <div class="flex gap-3 mt-4">
         <button onclick="copyNumber('999')" class="flex-1 flex items-center justify-center gap-1 border rounded-lg py-2 text-sm hover:bg-gray-100">
-        Copy
+        <img src="assets/copy.png" alt="">Copy
         </button>
         <button onclick="makeCall('National Emergency Number','999')" class="flex-1 flex items-center justify-center gap-1 bg-green-600 text-white rounded-lg py-2 text-sm hover:bg-green-700">
-        Call
+        <img src="assets/call.png" alt="">Call
         </button>
         </div>
         </div>
@@ -153,10 +153,10 @@
         <!-- Buttons -->
         <div class="flex gap-3 mt-4">
         <button onclick="copyNumber('999')" class="flex-1 flex items-center justify-center gap-1 border rounded-lg py-2 text-sm hover:bg-gray-100">
-        Copy
+        <img src="assets/copy.png" alt="">Copy
         </button>
         <button onclick="makeCall('National Emergency Number','999')" class="flex-1 flex items-center justify-center gap-1 bg-green-600 text-white rounded-lg py-2 text-sm hover:bg-green-700">
-        Call
+        <img src="assets/call.png" alt="">Call
         </button>
         </div>
         </div>
@@ -279,34 +279,42 @@
 
     <!-- Script -->
   <script>
-    let coins = 100;
-    let copyCount = 0;
+  let coins = 100;
+  let copyCount = 0;
 
-    function makeCall(service, number) {
-      if (coins < 20) {
-        alert("Not enough coins to make a call!");
-        return;
-      }
-      alert(`Calling ${service} at ${number}`);
-      coins -= 20;
-      document.getElementById("coinCount").innerText = coins;
-      let li = document.createElement("li");
-      li.textContent = `${service} - ${number}`;
-      document.getElementById("historyList").appendChild(li);
+  function makeCall(service, number) {
+    if (coins < 20) {
+      alert("Not enough coins to make a call!");
+      return;
     }
+    alert(`Calling ${service} at ${number}`);
+    coins -= 20;
+    document.getElementById("coinCount").innerText = coins;
 
-    function copyNumber(number) {
-      navigator.clipboard.writeText(number).then(() => {
-        alert("Number copied: " + number);
-        copyCount++;
-        document.getElementById("copyCount").innerText = copyCount;
-      });
-    }
+    // Get current time
+    let now = new Date();
+    let timeString = now.toLocaleString(); // full date+time
 
-    function clearHistory() {
-      document.getElementById("historyList").innerHTML = "";
-    }
-  </script>
+    // Create list item with time
+    let li = document.createElement("li");
+    li.innerHTML = `<span class="font-semibold">${service}</span> - ${number} 
+                    <span class="text-xs text-gray-500 block">⏰ ${timeString}</span>`;
+    document.getElementById("historyList").appendChild(li);
+  }
+
+  function copyNumber(number) {
+    navigator.clipboard.writeText(number).then(() => {
+      alert("Number copied: " + number);
+      copyCount++;
+      document.getElementById("copyCount").innerText = copyCount;
+    });
+  }
+
+  function clearHistory() {
+    document.getElementById("historyList").innerHTML = "";
+  }
+</script>
+
 
     
 </body>
