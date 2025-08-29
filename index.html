@@ -274,12 +274,40 @@
 
     </div>
 
-         </section>
-         
-
-
-
+    </section> 
     </main>
+
+    <!-- Script -->
+  <script>
+    let coins = 100;
+    let copyCount = 0;
+
+    function makeCall(service, number) {
+      if (coins < 20) {
+        alert("Not enough coins to make a call!");
+        return;
+      }
+      alert(`Calling ${service} at ${number}`);
+      coins -= 20;
+      document.getElementById("coinCount").innerText = coins;
+      let li = document.createElement("li");
+      li.textContent = `${service} - ${number}`;
+      document.getElementById("historyList").appendChild(li);
+    }
+
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number).then(() => {
+        alert("Number copied: " + number);
+        copyCount++;
+        document.getElementById("copyCount").innerText = copyCount;
+      });
+    }
+
+    function clearHistory() {
+      document.getElementById("historyList").innerHTML = "";
+    }
+  </script>
+
     
 </body>
 </html>
